@@ -5,8 +5,14 @@ const loginFormHandler = async (event) => {
   const email = document.querySelector('#email-login').value.trim();
   const password = document.querySelector('#password-login').value.trim();
 
-  if (email && password) {
-    // Send a POST request to the API endpoint
+  // Validate input fields
+  if (!email || !password) {
+    alert('Please enter both email and password.');
+    return;
+  }
+
+  try {
+    // Send a POST request to the login API endpoint
     const response = await fetch('/api/users/login', {
       method: 'POST',
       body: JSON.stringify({ email, password }),
@@ -14,17 +20,20 @@ const loginFormHandler = async (event) => {
     });
 
     if (response.ok) {
-      // If successful, redirect the browser to the profile page
+      // Redirect to the profile page on successful login
       document.location.replace('/profile');
     } else {
-      // changes this section to alert 'failed to sign in'
-      const err = await response.json()
-        console.log(err)
-        alert('Failed to log in');
+      const errorData = await response.json();
+      console.error('Error:', errorData);
+      alert(errorData.message || 'Failed to log in. Please check your email and password.');
     }
+  } catch (err) {
+    console.error('Error logging in:', err);
+    alert('An unexpected error occurred while logging in. Please try again later.');
   }
 };
 
+// Attach event listener to the login form
 document
-.querySelector('.login-form')
-.addEventListener('submit', loginFormHandler);
+  .querySelector('.login-form')
+  .addEventListener('submit', loginFormHandler);
