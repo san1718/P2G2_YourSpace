@@ -40,55 +40,6 @@
   {{#if logged_in}}
   <script src="/js/logout.js"></script>
   {{/if}}
-
-  
-
-<!-- Add a button to open the chat -->
-<button id="open-chat" class="btn btn-primary open-chat-button">Live Chat</button>
-
-<script>
-  const socket = io();
-
-  // Elements
-  const chatBox = document.querySelector("#chat-box");
-  const openChatButton = document.querySelector("#open-chat");
-  const toggleButton = document.querySelector("#chat-toggle");
-  const form = document.querySelector("#chat-form");
-  const input = document.querySelector("#chat-input");
-  const messages = document.querySelector("#messages");
-
-  // Open Chat Box
-  openChatButton.addEventListener("click", () => {
-    chatBox.classList.remove("hidden");
-    openChatButton.classList.add("hidden");
-  });
-
-  // Close Chat Box
-  toggleButton.addEventListener("click", () => {
-    chatBox.classList.add("hidden");
-    openChatButton.classList.remove("hidden");
-  });
-
-  // Handle form submission for sending messages
-  form.addEventListener("submit", (e) => {
-    e.preventDefault();
-    if (input.value.trim() !== "") {
-      socket.emit("chat message", input.value);
-      input.value = ""; // Clear input after sending
-    }
-  });
-
-  // Listen for incoming messages
-  socket.on("chat message", (msg) => {
-    const li = document.createElement("li");
-    li.textContent = msg;
-    messages.appendChild(li);
-    messages.scrollTop = messages.scrollHeight; // Auto-scroll to the bottom
-  });
-</script>
-
-<script src="/socket.io/socket.io.js"></script>
-
 </body>
 
 </html>
