@@ -23,7 +23,7 @@ Post.init(
     user_id: {
       type: DataTypes.INTEGER,
       references: {
-        model: 'user',
+        model: 'users',
         key: 'id',
       },
     },
@@ -33,7 +33,7 @@ Post.init(
     timestamps: false,
     freezeTableName: true,
     underscored: true,
-    modelName: 'post',
+    modelName: 'posts', // Explicitly matches 'posts' table
   }
 );
 
