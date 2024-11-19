@@ -1,24 +1,224 @@
-header, .project:not(:last-child) {
-  border-bottom: 1px solid #ccc;
+/* Define Theme Colors */
+:root {
+  --background-color: #fef6f9; /* Soft Pink */
+  --text-color: #4a4a4a; /* Dark Gray */
+  --primary-color: #ff869e; /* Soft Rose */
+  --secondary-color: #ffcbd4; /* Blush Pink */
+  --highlight-color: #ffe3e8; /* Light Blush */
+  --border-color: #ffcbd4; /* Blush Pink */
+  --danger-color: #ff9aa3; /* Soft Danger Pink */
+  --danger-hover-color: #ff6a8a; /* Danger Hover */
+  --input-background: #fff6f7; /* Input Background */
 }
 
-.no-button {
-  background: none;
-  border: none;
+/* General Reset */
+body, html {
+  margin: 0;
   padding: 0;
-  cursor: pointer;
-  color: #1b89bc;
-  text-decoration: none;
-  font-size: 100%;
+  font-family: 'Poppins', sans-serif;
+  background-color: var(--background-color);
+  color: var(--text-color);
+  line-height: 1.6;
+  scroll-behavior: smooth;
 }
 
-.no-button:hover {
-  color: #065b83;
-  text-decoration: underline;
+/* Header */
+header {
+  background-color: var(--highlight-color);
+  color: var(--text-color);
+  padding: 1rem 2rem;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  border-bottom: 2px solid var(--border-color);
 }
 
-.dollar-amount {
-  color: #056605;
+header h1 {
+  margin: 0;
+  font-size: 2rem;
   font-weight: bold;
-  margin-left: -5px;
+}
+
+header a, #logout {
+  color: var(--text-color);
+  text-decoration: none;
+  font-size: 1rem;
+  margin-left: 1rem;
+  cursor: pointer;
+}
+
+header a:hover, #logout:hover {
+  color: var(--primary-color);
+}
+
+/* Main Content */
+.container {
+  max-width: 900px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+h2, h3 {
+  color: var(--text-color);
+}
+
+h2 {
+  font-size: 2rem;
+  margin-bottom: 1rem;
+}
+
+h3 {
+  font-size: 1.5rem;
+  margin-bottom: 0.8rem;
+}
+
+/* Forms */
+form {
+  margin-top: 1.5rem;
+}
+
+.form-group {
+  margin-bottom: 1rem;
+}
+
+label {
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+  display: block;
+  color: var(--text-color);
+}
+
+input[type="text"], input[type="email"], input[type="password"], textarea {
+  width: 100%;
+  padding: 0.8rem;
+  border: 1px solid var(--border-color);
+  border-radius: 8px;
+  font-size: 1rem;
+  background-color: var(--input-background);
+  color: var(--text-color);
+}
+
+textarea {
+  resize: none;
+}
+
+input:focus, textarea:focus {
+  border-color: var(--primary-color);
+  outline: none;
+  box-shadow: 0 0 6px rgba(255, 134, 158, 0.5);
+}
+
+button {
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  color: #fff;
+  background-color: var(--primary-color);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+}
+
+button:hover {
+  background-color: var(--danger-hover-color);
+}
+
+button.btn-danger {
+  background-color: var(--danger-color);
+}
+
+button.btn-danger:hover {
+  background-color: var(--danger-hover-color);
+}
+
+/* Lists */
+ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+ul li {
+  padding: 0.5rem 0;
+  border-bottom: 1px solid var(--border-color);
+}
+
+ul li:last-child {
+  border-bottom: none;
+}
+
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: var(--highlight-color);
+  color: var(--text-color);
+  margin-top: 2rem;
+  border-top: 2px solid var(--border-color);
+}
+
+/* Flex Utilities */
+.text-center {
+  text-align: center;
+}
+
+.mt-4 {
+  margin-top: 2rem;
+}
+
+.mb-3 {
+  margin-bottom: 1.5rem;
+}
+
+.row {
+  display: flex;
+  flex-wrap: wrap;
+  margin: -0.5rem;
+}
+
+.col-md-6 {
+  flex: 0 0 50%;
+  padding: 0.5rem;
+}
+
+.col-md-8 {
+  flex: 0 0 66.6667%;
+  padding: 0.5rem;
+}
+
+.col-md-4 {
+  flex: 0 0 33.3333%;
+  padding: 0.5rem;
+}
+
+/* Post and Comment Styling */
+.post, .comment {
+  padding: 1.5rem;
+  background: var(--input-background);
+  border: 1px solid var(--border-color);
+  border-radius: 12px;
+  margin-bottom: 1rem;
+  transition: all 0.3s ease;
+}
+
+.post:hover, .comment:hover {
+  box-shadow: 0 4px 8px rgba(255, 134, 158, 0.2);
+}
+
+.post h2, .comment h3 {
+  margin: 0 0 0.5rem;
+}
+
+.post p, .comment p {
+  margin: 0.5rem 0;
+  color: var(--text-color);
+}
+
+/* Highlighting */
+.highlight {
+  background-color: var(--highlight-color);
+  padding: 0.25rem 0.5rem;
+  border-radius: 4px;
 }

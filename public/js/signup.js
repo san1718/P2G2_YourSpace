@@ -1,34 +1,40 @@
 const signupFormHandler = async (event) => {
-  //submit, click
   event.preventDefault();
-  // console.log('test')
-  // return
 
-  const firstName = document.querySelector('#firstName-signup').value.trim();
-  const lastName = document.querySelector('#lastName-signup').value.trim();
+  // Collect values from the signup form
+  const username = document.querySelector('#username-signup').value.trim();
   const email = document.querySelector('#email-signup').value.trim();
   const password = document.querySelector('#password-signup').value.trim();
-  const password2 = document.querySelector('#password-signup-2').value.trim();
 
-  if (firstName && email && password && lastName && password === password2) {
-    const response = await fetch('/api/user/signup', {
+  // Validate input fields
+  if (!username || !email || !password) {
+    alert('Please fill out all fields.');
+    return;
+  }
+
+  try {
+    // Send a POST request to the signup API endpoint
+    const response = await fetch('/api/users/signup', {
       method: 'POST',
-      body: JSON.stringify({ firstName, email, password, lastName }),
+      body: JSON.stringify({ username, email, password }),
       headers: { 'Content-Type': 'application/json' },
     });
 
     if (response.ok) {
-      document.location.replace('/');
-    } else if (password.length < 8) {
-      const err = await response.json();
-      console.log(err);
-      alert('Password must be minimum 8 characters');
+      // Redirect to the profile page on success
+      document.location.replace('/profile');
     } else {
-      alert('Password must only use letters and/or numbers');
+      const errorData = await response.json();
+      console.error('Error:', errorData);
+      alert(errorData.message || 'Failed to sign up. Please check your details and try again.');
     }
+  } catch (err) {
+    console.error('Error during signup:', err);
+    alert('An unexpected error occurred while signing up. Please try again later.');
   }
 };
 
+// Attach event listener to the signup form
 document
   .querySelector('.signup-form')
   .addEventListener('submit', signupFormHandler);

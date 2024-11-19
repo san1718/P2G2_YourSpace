@@ -1,11 +1,15 @@
 module.exports = {
   format_date: (date) => {
+    // Safeguard against invalid dates
+    if (!date) return '';
     // Format date as MM/DD/YYYY
-    return date.toLocaleDateString();
+    return new Date(date).toLocaleDateString();
   },
   format_amount: (amount) => {
-    // format large numbers with commas
-    return parseInt(amount).toLocaleString();
+    // Safeguard against invalid or non-numeric inputs
+    if (isNaN(amount)) return '0';
+    // Format large numbers with commas
+    return parseInt(amount, 10).toLocaleString();
   },
   get_emoji: () => {
     const randomNum = Math.random();
