@@ -1,0 +1,82 @@
+{{!--
+    Create user page.
+    Get it to redirect to profile after creation
+--}}
+<div class="row">
+  <div class="col-auto">
+    <h2>Welcome, {{name}}!</h2>
+  </div>
+</div>
+
+<div class="container">
+      <div class="columns">
+        <div class="column"></div>
+        <div class="column">
+          <div class="card">
+            <div class="card-content">
+              <h2 class="title is-4">Create Profile</h2>
+              <form id="createProfileForm">
+                <div class="field">
+                  <label class="label">Name</label>
+                  <div class="control">
+                    <input class="input" type="text" name="name" id="createName" placeholder="Enter your name" required>
+                  </div>
+                </div>
+                <div class="field">
+                  <label class="label">Username</label>
+                  <div class="control">
+                    <input class="input" type="text" name="username" id="createUsername" placeholder="Enter your username" required>
+                  </div>
+                </div>
+               <div class="field">
+                  <label class="label">Create Password</label>
+                  <div class="control">
+                    <input class="input" type="password" name="password" id="createPassword" placeholder="Create a password" required>
+                  </div>
+                </div>
+                <div class="field">
+                    <label class="label">Profile Picture</label>
+                    <div class="control">
+                      <input class="input" type="file" name="profilePicture" accept="image/*">
+                    </div>
+                  </div>
+                <div class="field">
+                  <div class="control">
+                    <button class="button is-primary" type="submit">Create Profile</button>
+                  </div>
+                </div>
+              </form>
+            </div>
+          </div>
+        </div>
+        <div class="column"></div>
+      </div>
+    </div>
+
+  {{#if projects.length}}
+  <div class="col-md-6 project-list">
+    <h3>Current Projects:</h3>
+
+    {{#each projects as |project|}}
+    <div class="row mb-2">
+      <div class="col-md-8">
+        <h4><a href="/project/{{project.id}}">{{project.name}}</a></h4>
+      </div>
+      <div class="col-md-4">
+        <button class="btn btn-sm btn-danger" data-id="{{project.id}}">DELETE</button>
+      </div>
+    </div>
+    {{/each}}
+  </div>
+  {{/if}}
+</div>
+
+<script src="/js/create.js"></script>
+{{!-- 
+fetch req for create.js
+create post route to take in data
+if successful then res.redirect(profile)
+it will redirect and pull from create
+target to input stuff
+alert if something is not filled or correct
+ --}}
