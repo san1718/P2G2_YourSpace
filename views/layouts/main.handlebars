@@ -5,7 +5,6 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>YourSpace🚀</title>
-  <link rel="stylesheet" href="/css/reset.css">
   <link rel="stylesheet" href="/css/style.css">
 </head>
 
@@ -13,22 +12,21 @@
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
       <h1>
-        <span role="img" aria-label="social">🌟</span>
+        <span role="img" aria-label="social">☄️</span>
         <a href="/">YourSpace</a>
       </h1>
       <nav>
-        <!-- Conditionally render login or logout links -->
         {{#if logged_in}}
-        <a href="/profile">Profile</a> |
-        <button class="no-button" id="logout">Logout</button>
+          <a href="/search">Search Users</a> |
+          <a href="/profile">My Profile</a> |
+          <button class="no-button" id="logout">Logout</button>
         {{else}}
-        <a href="/login">Login</a> |
-        <a href="/signup">Signup</a>
+          <a href="/login">Login</a> |
+          <a href="/signup">Signup</a>
         {{/if}}
       </nav>
     </header>
     <main class="container container-fluid mt-5">
-      <!-- Render the sub layout -->
       {{{ body }}}
     </main>
     <footer class="text-center p-2 mt-4">
@@ -36,9 +34,8 @@
     </footer>
   </div>
 
-  <!-- Render script for logged in users only -->
   {{#if logged_in}}
-  <script src="/js/logout.js"></script>
+    <script src="/js/logout.js"></script>
   {{/if}}
 </body>
 
