@@ -1,3 +1,7 @@
+// Need to change some variables to make it less confusing
+// e.g project --> profile or something
+// Replace the projects in homepage for profiles or posts etc
+
 const router = require('express').Router();
 const { Project, User } = require('../models');
 const withAuth = require('../utils/auth');
@@ -77,6 +81,19 @@ router.get('/login', (req, res) => {
   }
 
   res.render('login');
+});
+
+// Create profile page
+// Need:
+// 1. Create button working
+// 2. Redirect after submitting
+// 3. ? req from where res where
+router.get('/create', (req, res) => {
+  if (req.session.logged_in) {
+    res.redirect.apply('profile');
+    return;
+  }
+  res.render('create');
 });
 
 module.exports = router;
