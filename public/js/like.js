@@ -19,7 +19,7 @@ document.querySelectorAll('.like-btn').forEach((btn) => {
         likeCount.innerHTML = data.newLikeCount; // Update like count with response data
 
         // This will change button state to show the post is liked
-        btn.innerHTML = 'Liked';
+        btn.innerHTML = '👍';
         btn.disabled = false;
       } else {
         const errorData = await response.json();
