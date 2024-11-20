@@ -37,6 +37,16 @@ User.init(
         len: [8],
       },
     },
+
+    profile_picture: {
+      type: DataTypes.STRING,
+      allowNull: true, //optional field for profile picture
+    },
+      created_at: {
+      type: DataTypes.DATE,
+      allowNull: false,
+      defaultValue: DataTypes.NOW,
+    },
   },
   {
     hooks: {

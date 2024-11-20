@@ -1,224 +1,167 @@
-/* Define Theme Colors */
-:root {
-  --background-color: #fef6f9; /* Soft Pink */
-  --text-color: #4a4a4a; /* Dark Gray */
-  --primary-color: #ff869e; /* Soft Rose */
-  --secondary-color: #ffcbd4; /* Blush Pink */
-  --highlight-color: #ffe3e8; /* Light Blush */
-  --border-color: #ffcbd4; /* Blush Pink */
-  --danger-color: #ff9aa3; /* Soft Danger Pink */
-  --danger-hover-color: #ff6a8a; /* Danger Hover */
-  --input-background: #fff6f7; /* Input Background */
-}
-
 /* General Reset */
 body, html {
   margin: 0;
   padding: 0;
   font-family: 'Poppins', sans-serif;
-  background-color: var(--background-color);
-  color: var(--text-color);
-  line-height: 1.6;
+  background: linear-gradient(to bottom right, #ff869e, #ffcbd4);
+  color: #333;
   scroll-behavior: smooth;
+  min-height: 100vh;
 }
 
-/* Header */
-header {
-  background-color: var(--highlight-color);
-  color: var(--text-color);
-  padding: 1rem 2rem;
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  border-bottom: 2px solid var(--border-color);
-}
-
+/* Centering and Styling the "YourSpace" Title */
 header h1 {
-  margin: 0;
-  font-size: 2rem;
+  text-align: center;
+  font-size: 3rem; /* Bigger font size */
+  font-family: 'Montserrat', sans-serif; /* Modern font */
+  color: #ffffff; /* White text color */
+  text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.5); /* Add subtle shadow */
+  margin: 1rem 0;
+}
+
+header h1 a {
+  text-decoration: none;
+  color: inherit; /* Inherit color from h1 */
+}
+
+header {
+  background: rgba(0, 0, 0, 0.6); /* Semi-transparent black background */
+  padding: 1rem 0;
+}
+
+/* Links in the Navigation */
+header nav a {
+  color: #ffffff;
+  text-decoration: none;
+  font-size: 1.2rem;
+  margin: 0 1rem;
   font-weight: bold;
 }
 
-header a, #logout {
-  color: var(--text-color);
-  text-decoration: none;
-  font-size: 1rem;
-  margin-left: 1rem;
-  cursor: pointer;
+header nav a:hover {
+  color: #ffb6c1; /* Lighter pink on hover */
 }
 
-header a:hover, #logout:hover {
-  color: var(--primary-color);
-}
-
-/* Main Content */
-.container {
+/* Main Content Styling */
+main.container {
   max-width: 900px;
   margin: 2rem auto;
   padding: 2rem;
-  background: #ffffff;
+  background: rgba(255, 255, 255, 0.9); /* White with transparency */
   border-radius: 12px;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2); /* Subtle shadow */
 }
 
-h2, h3 {
-  color: var(--text-color);
-}
-
-h2 {
-  font-size: 2rem;
-  margin-bottom: 1rem;
-}
-
-h3 {
-  font-size: 1.5rem;
-  margin-bottom: 0.8rem;
-}
-
-/* Forms */
+/* Form Styling */
 form {
-  margin-top: 1.5rem;
+  margin: 1.5rem 0;
 }
 
-.form-group {
-  margin-bottom: 1rem;
+form .form-group {
+  margin-bottom: 1.2rem;
 }
 
-label {
+form label {
   font-weight: bold;
   margin-bottom: 0.5rem;
   display: block;
-  color: var(--text-color);
 }
 
-input[type="text"], input[type="email"], input[type="password"], textarea {
+form input[type="text"],
+form input[type="email"],
+form input[type="password"],
+form textarea {
   width: 100%;
   padding: 0.8rem;
-  border: 1px solid var(--border-color);
+  font-size: 1rem;
+  border: 1px solid #ddd;
   border-radius: 8px;
-  font-size: 1rem;
-  background-color: var(--input-background);
-  color: var(--text-color);
 }
 
-textarea {
-  resize: none;
-}
-
-input:focus, textarea:focus {
-  border-color: var(--primary-color);
-  outline: none;
-  box-shadow: 0 0 6px rgba(255, 134, 158, 0.5);
-}
-
-button {
-  padding: 0.8rem 1.5rem;
-  font-size: 1rem;
+form button {
+  background: #11144c;
   color: #fff;
-  background-color: var(--primary-color);
+  padding: 0.8rem 1.2rem;
   border: none;
-  border-radius: 8px;
+  border-radius: 5px;
+  font-size: 1rem;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: background 0.3s ease-in-out;
 }
 
-button:hover {
-  background-color: var(--danger-hover-color);
-}
-
-button.btn-danger {
-  background-color: var(--danger-color);
-}
-
-button.btn-danger:hover {
-  background-color: var(--danger-hover-color);
+form button:hover {
+  background: #3a9679;
 }
 
 /* Lists */
-ul {
-  list-style-type: none;
+.list-group {
+  list-style: none;
   padding: 0;
 }
 
-ul li {
-  padding: 0.5rem 0;
-  border-bottom: 1px solid var(--border-color);
-}
-
-ul li:last-child {
-  border-bottom: none;
+.list-group-item {
+  border: 1px solid #ddd;
+  padding: 1rem;
+  margin-bottom: 1rem;
+  border-radius: 8px;
+  background: #fff;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
 }
 
 /* Footer */
 footer {
   text-align: center;
   padding: 1rem;
-  background-color: var(--highlight-color);
-  color: var(--text-color);
-  margin-top: 2rem;
-  border-top: 2px solid var(--border-color);
-}
-
-/* Flex Utilities */
-.text-center {
-  text-align: center;
-}
-
-.mt-4 {
+  background: rgba(0, 0, 0, 0.6);
+  color: #ffffff;
+  border-top: 2px solid #db6d70;
   margin-top: 2rem;
 }
 
-.mb-3 {
-  margin-bottom: 1.5rem;
+/* Button Styling */
+button {
+  background-color: #6aa3b7;
+  color: #ffffff;
+  border: none;
+  border-radius: 5px;
+  padding: 0.8rem 1.5rem;
+  font-size: 1rem;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
 
-.row {
-  display: flex;
-  flex-wrap: wrap;
-  margin: -0.5rem;
+button:hover {
+  background-color: #fabc60;
 }
 
-.col-md-6 {
-  flex: 0 0 50%;
-  padding: 0.5rem;
+/* Responsive Background */
+body {
+  background: linear-gradient(to bottom right, #ff869e, #ffcbd4);
+  background-attachment: fixed;
+  background-size: cover;
 }
 
-.col-md-8 {
-  flex: 0 0 66.6667%;
-  padding: 0.5rem;
+/* Styling the Profile Picture */
+img.rounded-circle {
+  border-radius: 50%;
+  border: 3px solid #fff;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.3);
 }
 
-.col-md-4 {
-  flex: 0 0 33.3333%;
-  padding: 0.5rem;
-}
+/* Media Query for Mobile Screens */
+@media (max-width: 768px) {
+  header h1 {
+    font-size: 2.5rem; /* Slightly smaller title for small screens */
+  }
 
-/* Post and Comment Styling */
-.post, .comment {
-  padding: 1.5rem;
-  background: var(--input-background);
-  border: 1px solid var(--border-color);
-  border-radius: 12px;
-  margin-bottom: 1rem;
-  transition: all 0.3s ease;
-}
+  main.container {
+    padding: 1.5rem;
+  }
 
-.post:hover, .comment:hover {
-  box-shadow: 0 4px 8px rgba(255, 134, 158, 0.2);
-}
-
-.post h2, .comment h3 {
-  margin: 0 0 0.5rem;
-}
-
-.post p, .comment p {
-  margin: 0.5rem 0;
-  color: var(--text-color);
-}
-
-/* Highlighting */
-.highlight {
-  background-color: var(--highlight-color);
-  padding: 0.25rem 0.5rem;
-  border-radius: 4px;
+  form input[type="text"],
+  form input[type="email"],
+  form input[type="password"],
+  form textarea {
+    font-size: 0.9rem;
+  }
 }

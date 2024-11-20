@@ -15,6 +15,11 @@ Post.init(
       type: DataTypes.TEXT,
       allowNull: false,
     },
+    likes: {
+      type: DataTypes.INTEGER,
+      allowNull: false,
+      defaultValue: 0,
+    },
     created_at: {
       type: DataTypes.DATE,
       allowNull: false,
