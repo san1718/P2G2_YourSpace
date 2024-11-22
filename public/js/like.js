@@ -19,17 +19,17 @@ document.querySelectorAll('.like-btn').forEach((btn) => {
         likeCount.innerHTML = data.newLikeCount; // Update like count with response data
 
         // This will change button state to show the post is liked
-        btn.innerHTML = 'Liked';
+        btn.innerHTML = 'Liked 👍';
         btn.disabled = false;
       } else {
         const errorData = await response.json();
-        console.error('Error liking post:', errorData);
+        console.error('Error liking post: ', errorData);
         alert('Failed to like post.');
         btn.disabled = false;
         btn.innerHTML = 'Like'; // Revert button text if the like fails
       }
     } catch (err) {
-      console.error('Error:', err);
+      console.error('Error: ', err);
       alert('An error occurred while liking the post.');
       btn.disabled = false;
       btn.innerHTML = 'Like'; // Revert button text on error
