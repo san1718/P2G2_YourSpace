@@ -20,7 +20,7 @@ const newFormHandler = async (event) => {
         document.location.replace('/profile');
       } else {
         const err = await response.json();
-        console.log(err);
+        console.error(err);
         alert('Failed to create post. Please try again.');
       }
     } catch (err) {
@@ -48,7 +48,7 @@ const delButtonHandler = async (event) => {
         document.location.replace('/profile');
       } else {
         const err = await response.json();
-        console.log(err);
+        console.error(err);
         alert('Failed to delete post. Please try again.');
       }
     } catch (err) {
@@ -59,10 +59,10 @@ const delButtonHandler = async (event) => {
 };
 
 // Attach event listeners
-document
-  .querySelector('.new-post-form')
-  .addEventListener('submit', newFormHandler);
+if (document.querySelector('.new-post-form')) {
+  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+}
 
-document
-  .querySelector('.post-list')
-  .addEventListener('click', delButtonHandler);
+if (document.querySelector('.post-list')) {
+  document.querySelector('.post-list').addEventListener('click', delButtonHandler);
+}
