@@ -2,25 +2,26 @@ const router = require('express').Router();
 const { Post, User } = require('../models');
 const withAuth = require('../utils/auth');
 
-// Render homepage with posts
+// Render homepage with posts or welcome message
 router.get('/', async (req, res) => {
   try {
-    const postData = await Post.findAll({
-      include: [
-        {
-          model: User,
-          attributes: ['username'],
-        },
-      ],
-      order: [['created_at', 'DESC']], // Sort posts by creation date
-    });
+    if (req.session.logged_in) {
+      const postData = await Post.findAll({
+        include: [{ model: User, attributes: ['username'] }],
+        order: [['created_at', 'DESC']],
+      });
 
-    const posts = postData.map((post) => post.get({ plain: true }));
+      const posts = postData.map((post) => post.get({ plain: true }));
 
-    res.render('homepage', {
-      posts,
-      logged_in: req.session.logged_in || false,
-    });
+      return res.render('homepage', {
+        posts,
+        logged_in: true,
+      });
+    } else {
+      return res.render('homepage', {
+        logged_in: false,
+      });
+    }
   } catch (err) {
     console.error(err);
     res.status(500).json(err);
@@ -47,7 +48,7 @@ router.get('/signup', (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Post }], // Include user's posts
+      include: [{ model: Post }],
     });
 
     const user = userData.get({ plain: true });
