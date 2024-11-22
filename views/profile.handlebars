@@ -9,17 +9,35 @@
       class="rounded-circle mt-3" 
       style="width: 150px; height: 150px; object-fit: cover;"
     />
+  {{else}}
+    <p>No profile picture uploaded.</p>
   {{/if}}
+
+  <h3 class="mt-4">Profile Picture:</h3>
+  <form class="form update-profile-pic-form" enctype="multipart/form-data">
+    <div class="form-group">
+      <label for="profile-picture">Upload a New Profile Picture</label>
+      <input 
+        type="file" 
+        id="profile-picture" 
+        name="profile_picture" 
+        class="form-input" 
+        accept="image/*"
+      />
+    </div>
+    <button type="submit" class="btn btn-primary">Upload</button>
+  </form>
 
   <h3 class="mt-4">Create a New Post:</h3>
   <form class="form new-post-form">
     <div class="form-group">
+      <label for="post-content">Content</label>
       <textarea 
         id="post-content" 
         name="content" 
         class="form-input" 
         rows="3" 
-        placeholder="Type your post here!" 
+        placeholder="What's on your mind?" 
         required
       ></textarea>
     </div>
@@ -28,11 +46,12 @@
 
   <h3 class="mt-4">Your Posts:</h3>
   {{#if posts.length}}
-    <ul class="list-group">
+    <ul class="list-group post-list">
       {{#each posts}}
         <li class="list-group-item">
           <p>{{content}}</p>
           <p class="text-muted">Posted on {{format_date created_at}}</p>
+          <button class="btn btn-danger btn-sm delete-btn" data-id="{{id}}">Delete</button>
         </li>
       {{/each}}
     </ul>

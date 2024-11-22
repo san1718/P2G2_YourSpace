@@ -41,12 +41,25 @@ router.delete('/:id', withAuth, async (req, res) => {
 // Like a post
 router.put('/:id/like', withAuth, async (req, res) => {
   try {
-    const post = await Post.increment('likes', { where: { id: req.params.id } });
+    // Increment the 'likes' column for the specified post
+    const post = await Post.increment('likes', {
+      where: { id: req.params.id },
+    });
 
-    res.status(200).json(post);
+    // Fetch the updated post to get the current likes count
+    const updatedPost = await Post.findByPk(req.params.id, {
+      attributes: ['likes'],
+    });
+
+    if (!updatedPost) {
+      return res.status(404).json({ message: 'Post not found.' });
+    }
+
+    // Return the updated likes count
+    res.status(200).json({ likes: updatedPost.likes });
   } catch (err) {
     console.error(err);
-    res.status(500).json(err);
+    res.status(500).json({ message: 'Failed to like the post.' });
   }
 });
 
