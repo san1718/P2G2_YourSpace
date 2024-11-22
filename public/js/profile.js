@@ -1,13 +1,41 @@
-const newFormHandler = async (event) => {
+document.querySelector('.update-profile-pic-form').addEventListener('submit', async (event) => {
   event.preventDefault();
 
-  // Get post content from the form
-  const content = document.querySelector('#post-content').value.trim();
+  const formData = new FormData(event.target);
 
-  if (content) {
+  try {
+    const response = await fetch('/api/users/profile', {
+      method: 'PUT',
+      body: formData,
+    });
+
+    if (response.ok) {
+      alert('Profile picture uploaded successfully!');
+      window.location.reload(); // Reload the page to display the updated profile picture
+    } else {
+      const error = await response.json();
+      alert(error.message || 'Failed to upload profile picture.');
+    }
+  } catch (err) {
+    console.error('Error uploading profile picture:', err);
+    alert('An unexpected error occurred while uploading the profile picture.');
+  }
+});
+
+// Adding support for creating posts
+if (document.querySelector('.new-post-form')) {
+  document.querySelector('.new-post-form').addEventListener('submit', async (event) => {
+    event.preventDefault();
+
+    const content = document.querySelector('#post-content').value.trim();
+
+    if (!content) {
+      alert('Please enter content for your post.');
+      return;
+    }
+
     try {
-      // Send a POST request to the API to create a new post
-      const response = await fetch(`/api/posts`, {
+      const response = await fetch('/api/posts', {
         method: 'POST',
         body: JSON.stringify({ content }),
         headers: {
@@ -16,53 +44,41 @@ const newFormHandler = async (event) => {
       });
 
       if (response.ok) {
-        // Reload the profile page after successful creation
-        document.location.replace('/profile');
+        alert('Post created successfully!');
+        window.location.reload(); // Reload the page to display the new post
       } else {
-        const err = await response.json();
-        console.error(err);
-        alert('Failed to create post. Please try again.');
+        const error = await response.json();
+        alert(error.message || 'Failed to create post.');
       }
     } catch (err) {
       console.error('Error creating post:', err);
-      alert('An error occurred while creating the post.');
+      alert('An unexpected error occurred while creating the post.');
     }
-  } else {
-    alert('Please enter content for your post.');
-  }
-};
-
-const delButtonHandler = async (event) => {
-  // Check if the delete button was clicked
-  if (event.target.hasAttribute('data-id')) {
-    const id = event.target.getAttribute('data-id');
-
-    try {
-      // Send a DELETE request to the API to remove the post
-      const response = await fetch(`/api/posts/${id}`, {
-        method: 'DELETE',
-      });
-
-      if (response.ok) {
-        // Reload the profile page after successful deletion
-        document.location.replace('/profile');
-      } else {
-        const err = await response.json();
-        console.error(err);
-        alert('Failed to delete post. Please try again.');
-      }
-    } catch (err) {
-      console.error('Error deleting post:', err);
-      alert('An error occurred while deleting the post.');
-    }
-  }
-};
-
-// Attach event listeners
-if (document.querySelector('.new-post-form')) {
-  document.querySelector('.new-post-form').addEventListener('submit', newFormHandler);
+  });
 }
 
+// Adding support for deleting posts
 if (document.querySelector('.post-list')) {
-  document.querySelector('.post-list').addEventListener('click', delButtonHandler);
+  document.querySelector('.post-list').addEventListener('click', async (event) => {
+    if (event.target.matches('.delete-btn')) {
+      const postId = event.target.getAttribute('data-id');
+
+      try {
+        const response = await fetch(`/api/posts/${postId}`, {
+          method: 'DELETE',
+        });
+
+        if (response.ok) {
+          alert('Post deleted successfully!');
+          window.location.reload(); // Reload the page to remove the deleted post
+        } else {
+          const error = await response.json();
+          alert(error.message || 'Failed to delete post.');
+        }
+      } catch (err) {
+        console.error('Error deleting post:', err);
+        alert('An unexpected error occurred while deleting the post.');
+      }
+    }
+  });
 }
