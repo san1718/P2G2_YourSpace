@@ -4,36 +4,53 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>YourSpace🚀</title>
+  <title>YourSpace</title>
   <link rel="stylesheet" href="/css/style.css">
+  <style>
+    .logo-img {
+      width: 100px; /* Set width for the logo */
+      height: auto; /* Maintain aspect ratio */
+    }
+  </style>
 </head>
 
 <body>
   <div class="flex-column justify-space-around">
     <header class="display-flex justify-space-between align-center p-2">
+      <!-- Logo Section -->
       <h1>
-        <span role="img" aria-label="social">☄️</span>
-        <a href="/">YourSpace</a>
+        <a href="/">
+          <img src="/images/logo.png" alt="YourSpace Logo" class="logo-img">
+        </a>
       </h1>
+
+      <!-- Navigation Bar -->
       <nav>
-        {{#if logged_in}}
-          <a href="/search">Search Users</a> |
-          <a href="/profile">My Profile</a> |
-          <button class="no-button" id="logout">Logout</button>
-        {{else}}
-          <a href="/login">Login</a> |
-          <a href="/signup">Signup</a>
-        {{/if}}
-      </nav>
+        <a href="/">Home</a>
+      {{#if logged_in}}
+         
+        <a href="/search">Search Users</a> |
+        <a href="/profile">My Profile</a> |
+        <button class="no-button" id="logout">Logout</button>
+      {{else}}
+        <a href="/login">Login</a> |
+        <a href="/signup">Signup</a>
+      {{/if}}
+    </nav>
     </header>
+
+    <!-- Main Content -->
     <main class="container container-fluid mt-5">
       {{{ body }}}
     </main>
+
+    <!-- Footer -->
     <footer class="text-center p-2 mt-4">
       <p>&copy; 2024 YourSpace | Connect. Share. Engage.</p>
     </footer>
   </div>
 
+  <!-- Scripts -->
   {{#if logged_in}}
     <script src="/js/logout.js"></script>
   {{/if}}
