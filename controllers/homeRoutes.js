@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
+const { Op } = require('sequelize');
 const withAuth = require('../utils/auth');
 
 // Render homepage with posts or welcome message
