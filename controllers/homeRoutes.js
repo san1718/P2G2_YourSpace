@@ -1,5 +1,6 @@
 const router = require('express').Router();
 const { Post, User } = require('../models');
+const { Op } = require('sequelize');
 const withAuth = require('../utils/auth');
 
 // Render homepage with posts or welcome message
@@ -83,22 +84,51 @@ router.get('/profile/edit', withAuth, async (req, res) => {
 // Search for users
 router.get('/search', async (req, res) => {
   try {
-    const { username } = req.query; // Expect a query parameter like ?username=john
-    const userData = await User.findAll({
-      where: {
-        username: username ? username : '', // Adjust filtering logic as needed
-      },
+    const { username } = req.query;
+
+    const users = await User.findAll({
+      where: username
+        ? {
+            username: {
+              [Op.iLike]: `%${username}%`, // Case-insensitive partial match
+            },
+          }
+        : {}, // Fetch all users if no username is provided
+      attributes: ['id', 'username', 'email', 'profile_picture'],
     });
 
-    const users = userData.map((user) => user.get({ plain: true }));
+    const userList = users.map((user) => user.get({ plain: true }));
 
     res.render('userSearch', {
-      users,
+      users: userList,
       logged_in: req.session.logged_in || false,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error('Error searching for users:', err);
+    res.status(500).json({ message: 'Failed to fetch users.' });
+  }
+});
+
+// Render a specific user's profile
+router.get('/profile/:id', async (req, res) => {
+  try {
+    const userData = await User.findByPk(req.params.id, {
+      include: [{ model: Post }],
+    });
+
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found!' });
+    }
+
+    const user = userData.get({ plain: true });
+
+    res.render('user', {
+      ...user,
+      logged_in: req.session.logged_in || false,
+    });
+  } catch (err) {
+    console.error('Error fetching user profile:', err);
+    res.status(500).json({ message: 'Failed to load profile.' });
   }
 });
 
