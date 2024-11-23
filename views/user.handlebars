@@ -1,0 +1,30 @@
+<div class="container mt-5">
+  <h2>{{username}}'s Profile</h2>
+
+  <!-- Profile Picture -->
+  {{#if profile_picture}}
+    <img 
+      src="{{profile_picture}}" 
+      alt="{{username}}'s Profile Picture" 
+      class="rounded-circle mt-3" 
+      style="width: 150px; height: 150px; object-fit: cover;" 
+    />
+  {{else}}
+    <p>No profile picture uploaded.</p>
+  {{/if}}
+
+  <!-- User's Posts -->
+  <h3 class="mt-4">{{username}}'s Posts:</h3>
+  {{#if posts.length}}
+    <ul class="list-group">
+      {{#each posts}}
+        <li class="list-group-item">
+          <p>{{content}}</p>
+          <p class="text-muted">Posted on {{format_date created_at}}</p>
+        </li>
+      {{/each}}
+    </ul>
+  {{else}}
+    <p class="text-muted">{{username}} hasn't posted anything yet.</p>
+  {{/if}}
+</div>
