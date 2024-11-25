@@ -1,31 +1,34 @@
 const router = require('express').Router();
-const { Post, User } = require('../models');
-const { Op } = require('sequelize');
+const { Post, User, Comment } = require('../models');
 const withAuth = require('../utils/auth');
+const { Op } = require('sequelize');
 
 // Render homepage with posts or welcome message
 router.get('/', async (req, res) => {
   try {
-    if (req.session.logged_in) {
-      const postData = await Post.findAll({
-        include: [{ model: User, attributes: ['username'] }],
-        order: [['created_at', 'DESC']],
-      });
+    const postData = await Post.findAll({
+      include: [
+        { model: User, attributes: ['username'] },
+        {
+          model: Comment,
+          include: [{ model: User, attributes: ['username'] }],
+        },
+      ],
+      order: [['created_at', 'DESC']],
+    });
 
-      const posts = postData.map((post) => post.get({ plain: true }));
+    const posts = postData.map((post) => post.get({ plain: true }));
 
-      return res.render('homepage', {
-        posts,
-        logged_in: true,
-      });
-    } else {
-      return res.render('homepage', {
-        logged_in: false,
-      });
-    }
+    // Debugging: Log the posts and their comments
+    console.log('Fetched Posts with Comments:', JSON.stringify(posts, null, 2));
+
+    res.render('homepage', {
+      posts,
+      logged_in: req.session.logged_in || false,
+    });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error('Error fetching homepage data:', err);
+    res.status(500).json({ message: 'Failed to load homepage.' });
   }
 });
 
@@ -49,18 +52,35 @@ router.get('/signup', (req, res) => {
 router.get('/profile', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id, {
-      include: [{ model: Post }],
+      include: [
+        {
+          model: Post,
+          include: [
+            {
+              model: Comment,
+              include: [{ model: User, attributes: ['username'] }],
+            },
+          ],
+        },
+      ],
     });
 
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
     const user = userData.get({ plain: true });
+
+    // Debugging: Log the user and their posts
+    console.log('Fetched User Profile:', JSON.stringify(user, null, 2));
 
     res.render('profile', {
       ...user,
       logged_in: true,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error('Error fetching profile data:', err);
+    res.status(500).json({ message: 'Failed to load profile.' });
   }
 });
 
@@ -69,15 +89,22 @@ router.get('/profile/edit', withAuth, async (req, res) => {
   try {
     const userData = await User.findByPk(req.session.user_id);
 
+    if (!userData) {
+      return res.status(404).json({ message: 'User not found.' });
+    }
+
     const user = userData.get({ plain: true });
+
+    // Debugging: Log the user data for editing
+    console.log('Editing User Profile:', JSON.stringify(user, null, 2));
 
     res.render('editProfile', {
       ...user,
       logged_in: true,
     });
   } catch (err) {
-    console.error(err);
-    res.status(500).json(err);
+    console.error('Error fetching edit profile data:', err);
+    res.status(500).json({ message: 'Failed to load edit profile page.' });
   }
 });
 
@@ -90,14 +117,17 @@ router.get('/search', async (req, res) => {
       where: username
         ? {
             username: {
-              [Op.iLike]: `%${username}%`, // Case-insensitive partial match
+              [Op.iLike]: `%${username}%`,
             },
           }
-        : {}, // Fetch all users if no username is provided
+        : {},
       attributes: ['id', 'username', 'email', 'profile_picture'],
     });
 
     const userList = users.map((user) => user.get({ plain: true }));
+
+    // Debugging: Log the search results
+    console.log('Search Results:', JSON.stringify(userList, null, 2));
 
     res.render('userSearch', {
       users: userList,
@@ -113,7 +143,17 @@ router.get('/search', async (req, res) => {
 router.get('/profile/:id', async (req, res) => {
   try {
     const userData = await User.findByPk(req.params.id, {
-      include: [{ model: Post }],
+      include: [
+        {
+          model: Post,
+          include: [
+            {
+              model: Comment,
+              include: [{ model: User, attributes: ['username'] }],
+            },
+          ],
+        },
+      ],
     });
 
     if (!userData) {
@@ -121,6 +161,9 @@ router.get('/profile/:id', async (req, res) => {
     }
 
     const user = userData.get({ plain: true });
+
+    // Debugging: Log the specific user profile
+    console.log('Fetched User Profile with Posts:', JSON.stringify(user, null, 2));
 
     res.render('user', {
       ...user,
