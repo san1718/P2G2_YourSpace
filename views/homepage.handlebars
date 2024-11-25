@@ -1,77 +1,219 @@
 {{#if logged_in}}
-  <h2 class="text-center mb-4">Recent Posts</h2>
+  <div class="container" style="max-width: 800px; margin: auto; text-align: center;">
+    <h2 style="font-size: 2rem; font-weight: bold; margin-bottom: 2rem;">Recent Posts</h2>
 
-  {{#if posts.length}}
-    {{#each posts}}
-      <div class="row post mb-4 p-3 border rounded shadow-sm">
-        <!-- Post Header -->
-        <div class="col-12">
-          <div class="post-header d-flex align-items-center mb-3">
-            <div class="mr-3">
-              <h3 class="mb-0 font-weight-bold">{{user.username}}</h3>
-              <p class="text-muted small mb-0">{{format_date created_at}}</p>
+    {{#if posts.length}}
+      {{#each posts}}
+        <div 
+          class="post mb-4 p-4 shadow-sm rounded"
+          style="background: #f8f9fa; border-radius: 20px; text-align: left;"
+        >
+          <!-- Post Header -->
+          <div 
+            class="post-header d-flex align-items-center"
+            style="margin-bottom: 1.5rem; gap: 15px;"
+          >
+            {{#if user.profile_picture}}
+              <div>
+                <img 
+                  src="{{user.profile_picture}}" 
+                  alt="{{user.username}}'s Profile Picture" 
+                  class="rounded-circle" 
+                  style="width: 60px; height: 60px; object-fit: cover; border: 3px solid #007bff;"
+                />
+              </div>
+            {{/if}}
+            <div>
+              <h3 
+                style="margin: 0; font-size: 1.25rem; font-weight: bold; color: #333;"
+              >
+                {{user.username}}
+              </h3>
+              <p 
+                style="margin: 0; font-size: 0.85rem; color: #6c757d;"
+              >
+                {{format_date created_at}}
+              </p>
             </div>
           </div>
 
           <!-- Post Content -->
-          <div class="post-content">
-            <p class="mb-0">{{content}}</p>
-
-            <!-- Like Button -->
-            <button 
-              class="like-btn btn btn-primary mt-2" 
-              data-id="{{id}}">
-              Like ({{likes}})
-            </button>
+          <div class="post-content" style="margin-bottom: 1.5rem;">
+            <p 
+              style="font-size: 1rem; line-height: 1.5; margin: 0; color: #495057;"
+            >
+              {{content}}
+            </p>
           </div>
-        </div>
 
-        <!-- Comments Section -->
-        <div class="col-12 mt-3">
-          <div class="comments">
-            <h4>Comments</h4>
+          <!-- Like Button -->
+          <button 
+            class="like-btn btn btn-primary mt-2"
+            style="border-radius: 30px; padding: 10px 20px; font-size: 1rem; font-weight: bold;"
+            data-id="{{id}}"
+          >
+            Like ({{likes}})
+          </button>
 
-            <!-- Existing Comments -->
+          <!-- Comments Section -->
+          <div class="comments" style="margin-top: 2rem;">
+            <h4 style="font-size: 1.5rem; font-weight: bold; color: #007bff;">Comments</h4>
+
             {{#if comments.length}}
               {{#each comments}}
-                <div class="comment mb-2">
-                  <p><strong>{{user.username}}:</strong> {{comment}}</p>
-                  <p class="text-muted small">{{format_date created_at}}</p>
+                <div 
+                  class="comment mb-3"
+                  style="text-align: left; background: #ffffff; padding: 10px 15px; border-radius: 15px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);"
+                >
+                  <p 
+                    style="margin: 0; font-size: 1rem; font-weight: bold; color: #007bff;"
+                  >
+                    {{user.username}}:
+                  </p>
+                  <p 
+                    style="margin: 0; font-size: 0.9rem; color: #495057;"
+                  >
+                    {{comment}}
+                  </p>
+                  <p 
+                    style="margin: 0; font-size: 0.8rem; color: #6c757d;"
+                  >
+                    {{format_date created_at}}
+                  </p>
                 </div>
               {{/each}}
             {{else}}
-              <p class="text-muted">No comments yet. Be the first to comment!</p>
+              <p 
+                class="text-muted" 
+                style="font-size: 1rem; color: #6c757d;"
+              >
+                No comments yet. Be the first to comment!
+              </p>
             {{/if}}
 
             <!-- Add a Comment Form -->
             <form class="new-comment-form mt-3" data-id="{{id}}">
               <div class="form-group">
                 <textarea 
-                  class="form-input" 
+                  class="form-input"
+                  style="
+                    width: 100%; 
+                    border-radius: 15px; 
+                    padding: 10px; 
+                    border: 1px solid #ced4da; 
+                    box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1); 
+                    resize: none; 
+                    overflow-y: auto;
+                  "
                   name="comment" 
-                  rows="2" 
+                  rows="3" 
                   placeholder="Add a comment..." 
-                  required></textarea>
+                  required
+                ></textarea>
               </div>
-              <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+              <button 
+                type="submit" 
+                class="btn btn-primary btn-sm"
+                style="border-radius: 30px; padding: 10px 20px;"
+              >
+                Comment
+              </button>
             </form>
           </div>
         </div>
-      </div>
-    {{/each}}
-  {{else}}
-    <p class="text-muted text-center">No posts available. Be the first to post!</p>
-  {{/if}}
+      {{/each}}
+    {{else}}
+      <p 
+        class="text-muted" 
+        style="font-size: 1.25rem; margin-top: 2rem;"
+      >
+        No posts available. Be the first to post!
+      </p>
+    {{/if}}
+  </div>
 {{else}}
   <!-- Welcome Message for Logged-Out Users -->
-  <div class="welcome-container text-center">
-    <h1>Welcome to YourSpace</h1>
-    <p>YourSpace is a place to connect and engagev with like-minded individuals. Join today!</p>
-    <a href="/login" class="btn btn-primary mr-2">Login</a>
-    <a href="/signup" class="btn btn-secondary">Sign Up</a>
+  <div 
+    class="welcome-container text-center" 
+    style="padding: 50px; background: #f8f9fa; border-radius: 20px; max-width: 600px; margin: auto;"
+  >
+    <h1 
+      style="font-size: 2rem; font-weight: bold; color: #007bff; margin-bottom: 1rem;"
+    >
+      Welcome to YourSpace
+    </h1>
+    <p 
+      style="font-size: 1.1rem; color: #495057; margin-bottom: 2rem;"
+    >
+      YourSpace is a place to connect and engage with like-minded individuals. Join today!
+    </p>
+    <!-- Images Section -->
+    <div 
+      class="images-section d-flex justify-content-center mb-4"
+      style="display: flex; gap: 20px; justify-content: center;"
+    >
+      <img 
+        src="/images/image1.png" 
+        alt="Image 1" 
+        style="
+          width: 100px; 
+          height: 100px; 
+          object-fit: cover;"
+      />
+      <img 
+        src="/images/image2.png" 
+        alt="Image 2" 
+        style="
+          width: 100px; 
+          height: 100px; 
+          object-fit: cover;"
+      />
+    </div>
+    <!-- Login Button -->
+    <div class="form-group" style="margin-bottom: 15px;">
+      <a 
+        href="/login" 
+        class="btn btn-primary"
+        style="
+          margin-top: 30px;
+          display: inline-block;
+          padding: 10px 20px;
+          border-radius: 30px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: bold;
+          transition: background-color 0.3s ease;"
+        onmouseover="this.style.backgroundColor='#0056b3';"
+        onmouseout="this.style.backgroundColor='#007bff';"
+      >
+        Login
+      </a>
+    </div>
+    <!-- Sign Up Button -->
+    <div class="form-group">
+      <a 
+        href="/signup" 
+        class="btn btn-secondary"
+        style="
+          display: inline-block;
+          padding: 10px 20px;
+          border-radius: 30px;
+          background-color: #007bff;
+          color: #fff;
+          text-decoration: none;
+          font-size: 1rem;
+          font-weight: bold;
+          transition: background-color 0.3s ease;"
+        onmouseover="this.style.backgroundColor='#0056b3';"
+        onmouseout="this.style.backgroundColor='#007bff';"
+      >
+        Sign Up
+      </a>
+    </div>
   </div>
 {{/if}}
-
 
 <script src="/js/like.js"></script>
 <script src="/js/comments.js"></script>
