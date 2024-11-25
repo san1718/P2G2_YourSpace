@@ -40,7 +40,7 @@ Live messaging, notifications, ability to view in dark mode, marketplace, a work
 
 
 ## Screenshot
-
+![image](https://github.com/user-attachments/assets/18085160-2c42-4d4d-b867-bcf1fa035e97)
 
 ## Usage
 
