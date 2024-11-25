@@ -2,24 +2,59 @@
   <h2 class="text-center mb-4">Recent Posts</h2>
 
   {{#if posts.length}}
-    {{#each posts as |post|}}
+    {{#each posts}}
       <div class="row post mb-4 p-3 border rounded shadow-sm">
+        <!-- Post Header -->
         <div class="col-12">
           <div class="post-header d-flex align-items-center mb-3">
             <div class="mr-3">
-              <h3 class="mb-0 font-weight-bold">{{post.user.username}}</h3>
-              <p class="text-muted small mb-0">{{format_date post.created_at}}</p>
+              <h3 class="mb-0 font-weight-bold">{{user.username}}</h3>
+              <p class="text-muted small mb-0">{{format_date created_at}}</p>
             </div>
           </div>
+
+          <!-- Post Content -->
           <div class="post-content">
-            <p class="mb-0">{{post.content}}</p>
+            <p class="mb-0">{{content}}</p>
+
+            <!-- Like Button -->
             <button 
               class="like-btn btn btn-primary mt-2" 
-              data-id="{{post.id}}" 
-              data-logged-in="true"
-            >
-              Like ({{post.likes}})
+              data-id="{{id}}">
+              Like ({{likes}})
             </button>
+          </div>
+        </div>
+
+        <!-- Comments Section -->
+        <div class="col-12 mt-3">
+          <div class="comments">
+            <h4>Comments</h4>
+
+            <!-- Existing Comments -->
+            {{#if comments.length}}
+              {{#each comments}}
+                <div class="comment mb-2">
+                  <p><strong>{{user.username}}:</strong> {{comment}}</p>
+                  <p class="text-muted small">{{format_date created_at}}</p>
+                </div>
+              {{/each}}
+            {{else}}
+              <p class="text-muted">No comments yet. Be the first to comment!</p>
+            {{/if}}
+
+            <!-- Add a Comment Form -->
+            <form class="new-comment-form mt-3" data-id="{{id}}">
+              <div class="form-group">
+                <textarea 
+                  class="form-input" 
+                  name="comment" 
+                  rows="2" 
+                  placeholder="Add a comment..." 
+                  required></textarea>
+              </div>
+              <button type="submit" class="btn btn-primary btn-sm">Comment</button>
+            </form>
           </div>
         </div>
       </div>
@@ -28,13 +63,15 @@
     <p class="text-muted text-center">No posts available. Be the first to post!</p>
   {{/if}}
 {{else}}
-  <div class="welcome-container">
+  <!-- Welcome Message for Logged-Out Users -->
+  <div class="welcome-container text-center">
     <h1>Welcome to YourSpace</h1>
-    <p>YourSpace is a place to connect, share, and engage. Join us today!</p>
+    <p>YourSpace is a place to connect and engagev with like-minded individuals. Join today!</p>
     <a href="/login" class="btn btn-primary mr-2">Login</a>
     <a href="/signup" class="btn btn-secondary">Sign Up</a>
   </div>
 {{/if}}
 
-<script src="/js/like.js"></script>
 
+<script src="/js/like.js"></script>
+<script src="/js/comments.js"></script>
