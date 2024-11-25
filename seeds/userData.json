@@ -1,17 +1,27 @@
 [
   {
-    "username": "john_doe",
-    "email": "john@example.com",
-    "password": "password123"
+    "username": "john_traveler",
+    "email": "john.traveler@example.com",
+    "password": "exploreMore123"
   },
   {
-    "username": "jane_doe",
-    "email": "jane@example.com",
-    "password": "password123"
+    "username": "jane_writer",
+    "email": "jane.writer@example.com",
+    "password": "penAndPaper456"
   },
   {
-    "username": "test_user",
-    "email": "test@example.com",
-    "password": "password123"
+    "username": "alex_coder",
+    "email": "alex.coder@example.com",
+    "password": "devLife789"
+  },
+  {
+    "username": "mia_foodie",
+    "email": "mia.foodie@example.com",
+    "password": "tasteTheWorld321"
+  },
+  {
+    "username": "lisa_runner",
+    "email": "lisa.runner@example.com",
+    "password": "onTheMove654"
   }
 ]

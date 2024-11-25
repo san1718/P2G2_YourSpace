@@ -2,30 +2,34 @@ document.querySelectorAll('.like-btn').forEach((btn) => {
   btn.addEventListener('click', async () => {
     const postId = btn.getAttribute('data-id');
 
-    // Disable the button to prevent multiple clicks
+    // Prevent multiple clicks by disabling the button
+    if (btn.disabled) return;
+
     btn.disabled = true;
-    btn.innerHTML = 'Liking...';
 
     try {
       const response = await fetch(`/api/posts/${postId}/like`, {
-        method: 'PUT',
+        method: 'POST', // Changed to POST to match the route in postRoutes.js
       });
 
       if (response.ok) {
         const data = await response.json();
-        // Update button text dynamically with new like count
+
+        // Update button appearance and text
         btn.innerHTML = `Liked (${data.likes})`;
+        btn.style.backgroundColor = '#0056b3'; // Change to darker blue to indicate it's liked
+        btn.style.borderColor = '#0056b3'; // Match border color
+        btn.style.color = '#ffffff'; // Ensure text is readable
       } else {
         const errorData = await response.json();
         console.error('Error liking post:', errorData);
-        alert('Failed to like post. Please try again.');
-        btn.innerHTML = 'Like';
+        alert(errorData.message || 'Failed to like post. Please try again.');
       }
     } catch (err) {
       console.error('Error:', err);
       alert('An error occurred while liking the post.');
-      btn.innerHTML = 'Like';
     } finally {
+      // Always re-enable the button after the operation
       btn.disabled = false;
     }
   });
