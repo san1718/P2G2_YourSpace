@@ -1,49 +1,100 @@
 <div class="container mt-5">
-  <h2 class="text-center">Search for Users</h2>
+  <h2 
+    class="text-center" 
+    style="font-size: 2rem; font-weight: bold; color: #333; margin-bottom: 2rem;"
+  >
+    Search for Users
+  </h2>
 
   <!-- Search Form -->
-  <form id="search-form" class="form search-form mt-4">
+  <form 
+    id="search-form" 
+    class="form search-form mt-4"
+    style="background: #ffffff; padding: 20px; border-radius: 15px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);"
+  >
     <div class="form-group">
-      <label for="username" class="font-weight-bold">Search by Username:</label>
+      <label 
+        for="username" 
+        style="font-size: 1rem; font-weight: bold; color: #495057; margin-bottom: 10px; display: block;"
+      >
+        Search by Username:
+      </label>
       <input 
         type="text" 
         id="username" 
         name="username" 
         class="form-input" 
         placeholder="Enter part of a username" 
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
       />
     </div>
     <div class="form-group text-center">
-      <button type="submit" class="btn btn-primary">Search</button>
+      <button 
+        type="submit" 
+        class="btn btn-primary"
+        style="border-radius: 30px; padding: 10px 20px; font-size: 1rem; font-weight: bold;"
+      >
+        Search
+      </button>
     </div>
   </form>
 
   <!-- Search Results -->
   <div id="search-results" class="search-results mt-5">
     {{#if users.length}}
-      <h3>Results:</h3>
+      <h3 
+        class="text-center" 
+        style="font-size: 1.5rem; font-weight: bold; color: #007bff; margin-bottom: 1.5rem;"
+      >
+        Results
+      </h3>
       <ul class="list-group">
         {{#each users}}
-          <li class="list-group-item">
-            <div class="d-flex justify-content-between align-items-center">
-              <div>
-                <strong>{{username}}</strong><br />
-                {{#if profile_picture}}
-                  <img 
-                    src="{{profile_picture}}" 
-                    alt="Profile Picture" 
-                    class="rounded-circle mt-2" 
-                    style="width: 50px; height: 50px; object-fit: cover;" 
-                  />
-                {{/if}}
-              </div>
-              <a href="/profile/{{id}}" class="btn btn-sm btn-info">View Profile</a>
+          <li 
+            class="list-group-item mb-3"
+            style="background: #ffffff; padding: 15px; border-radius: 15px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1); display: flex; align-items: center; justify-content: space-between;"
+          >
+            <!-- User Info -->
+            <div style="display: flex; align-items: center; gap: 15px;">
+              {{#if profile_picture}}
+                <img 
+                  src="{{profile_picture}}" 
+                  alt="Profile Picture" 
+                  class="rounded-circle" 
+                  style="width: 50px; height: 50px; object-fit: cover; border: 3px solid #007bff;"
+                />
+              {{/if}}
+              <strong 
+                style="font-size: 1rem; font-weight: bold; color: #333;"
+              >
+                {{username}}
+              </strong>
             </div>
+
+            <!-- View Profile Button -->
+            <a 
+              href="/profile/{{id}}" 
+              class="btn btn-info btn-sm"
+              style="border-radius: 30px; padding: 10px 15px; font-size: 0.9rem; font-weight: bold;"
+            >
+              View Profile
+            </a>
           </li>
         {{/each}}
       </ul>
     {{else}}
-      <p class="text-center text-muted">No users found. Try another search!</p>
+      <p 
+        class="text-center text-muted" 
+        style="font-size: 1rem; color: #6c757d; margin-top: 1rem;"
+      >
+        No users found. Try another search!
+      </p>
     {{/if}}
   </div>
 </div>
