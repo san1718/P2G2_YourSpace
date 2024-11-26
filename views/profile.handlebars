@@ -1,37 +1,116 @@
 <div class="container mt-5">
-  <h2>{{username}}'s Profile</h2>
-  <p>Email: {{email}}</p>
+  <h2 
+    style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; color: #333;"
+  >
+    {{username}}'s Profile
+  </h2>
+  <p 
+    style="font-size: 1rem; color: #6c757d; margin-bottom: 1rem;"
+  >
+    Email: {{email}}
+  </p>
 
+  <!-- Edit Profile Button -->
+  <div class="text-start" style="margin-bottom: 1.5rem;">
+    <a 
+      href="/profile/edit" 
+      class="btn btn-primary"
+      style="
+        border-radius: 30px; 
+        padding: 10px 20px; 
+        font-size: 1rem; 
+        font-weight: bold; 
+        text-decoration: none; 
+        color: #ffffff; 
+        background-color: #007bff; 
+        display: inline-block; 
+        box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+      "
+    >
+      Edit Profile
+    </a>
+  </div>
+
+  <!-- Profile Picture -->
   {{#if profile_picture}}
-    <img 
-      src="{{profile_picture}}" 
-      alt="Profile Picture" 
-      class="rounded-circle mt-3" 
-      style="width: 150px; height: 150px; object-fit: cover;"
-    />
+    <div class="text-center">
+      <img 
+        src="{{profile_picture}}" 
+        alt="Profile Picture" 
+        class="rounded-circle mt-3" 
+        style="width: 150px; height: 150px; object-fit: cover; border: 3px solid #007bff;"
+      />
+    </div>
   {{else}}
-    <p>No profile picture uploaded.</p>
+    <p 
+      class="text-center text-muted mt-3"
+      style="font-size: 1rem; color: #6c757d;"
+    >
+      No profile picture uploaded.
+    </p>
   {{/if}}
 
-  <h3 class="mt-4">Profile Picture:</h3>
-  <form class="form update-profile-pic-form" enctype="multipart/form-data">
+  <!-- Upload Profile Picture Form -->
+  <h3 
+    class="mt-4"
+    style="font-size: 1.5rem; font-weight: bold; color: #007bff; margin-bottom: 1rem;"
+  >
+    Profile Picture
+  </h3>
+  <form 
+    class="form update-profile-pic-form" 
+    enctype="multipart/form-data"
+    style="margin-bottom: 2rem;"
+  >
     <div class="form-group">
-      <label for="profile-picture">Upload a New Profile Picture</label>
+      <label 
+        for="profile-picture" 
+        style="font-size: 1rem; font-weight: bold; color: #495057;"
+      >
+        Upload a New Profile Picture
+      </label>
       <input 
         type="file" 
         id="profile-picture" 
         name="profile_picture" 
         class="form-input" 
         accept="image/*"
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
       />
     </div>
-    <button type="submit" class="btn btn-primary">Upload</button>
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      style="border-radius: 30px; padding: 10px 20px; font-size: 1rem; font-weight: bold;"
+    >
+      Upload
+    </button>
   </form>
 
-  <h3 class="mt-4">Create a New Post:</h3>
-  <form class="form new-post-form">
+  <!-- Create a New Post Form -->
+  <h3 
+    class="mt-4"
+    style="font-size: 1.5rem; font-weight: bold; color: #007bff; margin-bottom: 1rem;"
+  >
+    Create a New Post
+  </h3>
+  <form 
+    class="form new-post-form"
+    style="margin-bottom: 2rem;"
+  >
     <div class="form-group">
-      <label for="post-content">Content</label>
+      <label 
+        for="post-content" 
+        style="font-size: 1rem; font-weight: bold; color: #495057;"
+      >
+        Content
+      </label>
       <textarea 
         id="post-content" 
         name="content" 
@@ -39,24 +118,66 @@
         rows="3" 
         placeholder="What's on your mind?" 
         required
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          resize: none; 
+          overflow-y: auto; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
       ></textarea>
     </div>
-    <button type="submit" class="btn btn-primary">Post</button>
+    <button 
+      type="submit" 
+      class="btn btn-primary"
+      style="border-radius: 30px; padding: 10px 20px; font-size: 1rem; font-weight: bold;"
+    >
+      Post
+    </button>
   </form>
 
-  <h3 class="mt-4">Your Posts:</h3>
+  <!-- User's Posts -->
+  <h3 
+    class="mt-4"
+    style="font-size: 1.5rem; font-weight: bold; color: #007bff; margin-bottom: 1rem;"
+  >
+    Your Posts
+  </h3>
   {{#if posts.length}}
     <ul class="list-group post-list">
       {{#each posts}}
-        <li class="list-group-item">
-          <p>{{content}}</p>
-          <p class="text-muted">Posted on {{format_date created_at}}</p>
-          <button class="btn btn-danger btn-sm delete-btn" data-id="{{id}}">Delete</button>
+        <li 
+          class="list-group-item mb-3"
+          style="background: #ffffff; padding: 15px; border-radius: 15px; box-shadow: 0 1px 4px rgba(0, 0, 0, 0.1);"
+        >
+          <p 
+            style="font-size: 1rem; color: #495057; margin-bottom: 0.5rem;"
+          >
+            {{content}}
+          </p>
+          <p 
+            style="font-size: 0.85rem; color: #6c757d; margin-bottom: 1rem;"
+          >
+            Posted on {{format_date created_at}}
+          </p>
+          <button 
+            class="btn btn-danger btn-sm delete-btn"
+            data-id="{{id}}"
+            style="border-radius: 30px; padding: 5px 15px; font-size: 0.9rem; font-weight: bold;"
+          >
+            Delete
+          </button>
         </li>
       {{/each}}
     </ul>
   {{else}}
-    <p class="text-muted">You haven't created any posts yet.</p>
+    <p 
+      style="font-size: 1rem; color: #6c757d; margin-top: 1rem;"
+    >
+      You haven't created any posts yet.
+    </p>
   {{/if}}
 </div>
 

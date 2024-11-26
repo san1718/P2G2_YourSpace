@@ -1,59 +1,115 @@
-<div class="row justify-content-center">
-  <div class="col-md-6">
-    <h2 class="text-center">Create an Account</h2>
+<div 
+  class="container" 
+  style="max-width: 500px; margin: auto; background: #f8f9fa; padding: 30px; border-radius: 20px; box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);"
+>
+  <h2 
+    style="font-size: 2rem; font-weight: bold; margin-bottom: 1.5rem; text-align: center; color: #333;"
+  >
+    Create an Account
+  </h2>
 
-    <form class="form signup-form">
-      <!-- Username Field -->
-      <div class="form-group">
-        <label for="username-signup" class="font-weight-bold">Username:</label>
-        <input 
-          class="form-input" 
-          type="text" 
-          id="username-signup" 
-          name="username" 
-          placeholder="Choose a username" 
-          required 
-        />
-      </div>
+  <form class="form signup-form">
+    <!-- Username Field -->
+    <div class="form-group" style="margin-bottom: 1rem;">
+      <label 
+        for="username-signup" 
+        style="font-size: 1rem; font-weight: bold; color: #495057;"
+      >
+        Username:
+      </label>
+      <input 
+        class="form-input" 
+        type="text" 
+        id="username-signup" 
+        name="username" 
+        placeholder="Choose a username" 
+        required 
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
+      />
+    </div>
 
-      <!-- Email Field -->
-      <div class="form-group">
-        <label for="email-signup" class="font-weight-bold">Email:</label>
-        <input 
-          class="form-input" 
-          type="email" 
-          id="email-signup" 
-          name="email" 
-          placeholder="Enter your email" 
-          required 
-        />
-      </div>
+    <!-- Email Field -->
+    <div class="form-group" style="margin-bottom: 1rem;">
+      <label 
+        for="email-signup" 
+        style="font-size: 1rem; font-weight: bold; color: #495057;"
+      >
+        Email:
+      </label>
+      <input 
+        class="form-input" 
+        type="email" 
+        id="email-signup" 
+        name="email" 
+        placeholder="Enter your email" 
+        required 
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
+      />
+    </div>
 
-      <!-- Password Field -->
-      <div class="form-group">
-        <label for="password-signup" class="font-weight-bold">Password:</label>
-        <input 
-          class="form-input" 
-          type="password" 
-          id="password-signup" 
-          name="password" 
-          placeholder="Enter a strong password" 
-          required 
-          minlength="8" 
-        />
-      </div>
+    <!-- Password Field -->
+    <div class="form-group" style="margin-bottom: 1.5rem;">
+      <label 
+        for="password-signup" 
+        style="font-size: 1rem; font-weight: bold; color: #495057;"
+      >
+        Password:
+      </label>
+      <input 
+        class="form-input" 
+        type="password" 
+        id="password-signup" 
+        name="password" 
+        placeholder="Enter a strong password" 
+        required 
+        minlength="8" 
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 10px; 
+          border: 1px solid #ced4da; 
+          font-size: 1rem; 
+          box-shadow: inset 0 1px 3px rgba(0, 0, 0, 0.1);"
+      />
+    </div>
 
-      <!-- Submit Button -->
-      <div class="form-group">
-        <button class="btn btn-primary w-100" type="submit">Sign Up</button>
-      </div>
-    </form>
+    <!-- Submit Button -->
+    <div class="form-group">
+      <button 
+        class="btn btn-primary" 
+        type="submit" 
+        style="
+          width: 100%; 
+          padding: 10px; 
+          border-radius: 30px; 
+          font-size: 1rem; 
+          font-weight: bold;"
+      >
+        Sign Up
+      </button>
+    </div>
+  </form>
 
-    <!-- Link to Login -->
-    <p class="mt-3 text-center">
-      Already have an account? <a href="/login">Login here</a>.
-    </p>
-  </div>
+  <!-- Link to Login -->
+  <p 
+    class="mt-3 text-center" 
+    style="font-size: 1rem; color: #495057;"
+  >
+    Already have an account? 
+    <a href="/login" style="color: #007bff; font-weight: bold;">Login here</a>.
+  </p>
 </div>
 
 <script src="/js/signup.js"></script>
