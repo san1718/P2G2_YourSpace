@@ -1,6 +1,7 @@
 # YourSpace
 
-YourSpace is an innovative and interactive social media platform built to foster meaningful connections in a community-driven environment. Designed with a polished UI and seamless user experience, YourSpace enables users to create personalized profiles, share posts, and interact with others through likes, comments, and real-time engagement. It is a full-stack application deployed on Render and designed using the latest technologies, following the MVC paradigm for scalability and maintainability.
+YourSpace is an innovative and interactive social media platform built to foster meaningful connections in a community-driven environment. Designed with a polished UI and seamless user experience, YourSpace enables users to create personalized profiles, share posts, and interact with others through likes, comments, and real-time engagement. 
+It is a full-stack application deployed on Render and designed using the latest technologies, following the MVC paradigm for scalability and maintainability.
 
 ## Table of Contents
 
